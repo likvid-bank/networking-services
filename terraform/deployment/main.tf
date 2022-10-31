@@ -45,9 +45,17 @@ resource "kubernetes_secret" "unipipe_networking" {
     "GIT_SSH_KEY"             = tls_private_key.git_ssh_key.private_key_pem
     "APP_BASIC_AUTH_USERNAME" = "marketplace"
     "APP_BASIC_AUTH_PASSWORD" = random_password.basic_auth_password.result
+
+    # terraform-runner
+    "GIT_USER_EMAIL"         = "terraform-runner@meshcloud.io"
+    "GIT_USER_NAME"          = "terraform runner"
+    "TF_VAR_platform_secret" = azuread_service_principal_password.unipipe-networking.value
+    "ARM_TENANT_ID"          = local.tenant_id
+    "ARM_SUBSCRIPTION_ID"    = local.subscription_id
+    "ARM_CLIENT_ID"          = azuread_service_principal.unipipe-networking.object_id
+    "ARM_CLIENT_SECRET"      = azuread_service_principal_password.unipipe-networking.value
   }
 }
-
 
 resource "kubernetes_service" "meshfed" {
   metadata {
@@ -102,6 +110,18 @@ resource "kubernetes_deployment" "unipipe_networking" {
             }
           }
         }
+
+        container {
+          name  = "unipipe-terraform-runner"
+          image = "ghcr.io/meshcloud/unipipe-terraform-runner:latest"
+
+          env_from {
+            secret_ref {
+              name = "unipipe-networking-config"
+            }
+          }
+        }
+
       }
     }
   }
@@ -112,6 +132,6 @@ output "url" {
 }
 
 output "password" {
-  value = random_password.basic_auth_password.result
+  value     = random_password.basic_auth_password.result
   sensitive = true
 }
