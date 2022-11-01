@@ -25,11 +25,11 @@ services:
               parameters:
                 "$schema": http://json-schema.org/draft-04/schema#
                 properties:
+
                   vnet_size:
                     title: size of vNet
                     type: string
-                    widget:
-                      id: select
+                    widget: select
                     default: "25"
                     oneOf:
                       - description: /27 vNet with 11 addresses (+5 addresses reserved by Azure)
@@ -47,25 +47,18 @@ services:
                       - description: /23 vNet with 251 addresses (+5 addresses reserved by Azure)
                         enum:
                           - "23"
+
                   location:
                     title: vNet Location
                     type: string
-                    widget:
-                      id: select
+                    widget: select
                     default: "WestEurope"
-                    oneOf:
-                      - description: WestEurope (default choice)
-                        enum:
-                          - "WestEurope"
-                      - description: GermanyWestCentral
-                        enum:
-                          - "GermanyWestCentral"
-                      - description: NorthEurope
-                        enum:
-                          - "NorthEurope"
-                      - description: EastUS
-                        enum:
-                          - "EastUS"
+                    enum:
+                      - "WestEurope"
+                      - "GermanyWestCentral"
+                      - "NorthEurope"
+                      - "EastUS"
+
       - id: "b4c64100-f648-4373-a657-9aa94196b59f"
         name: "On-prem"
         description: "Choose this plan if you need on-prem connectivity. It creates an Azure subnet with routing tables to on-prem."
@@ -83,11 +76,11 @@ services:
               parameters:
                 "$schema": http://json-schema.org/draft-04/schema#
                 properties:
+
                   vnet_size:
                     title: size of vNet
                     type: string
-                    widget:
-                      id: select
+                    widget: select
                     default: "25"
                     oneOf:
                       - description: /27 vNet with 11 addresses (+5 addresses reserved by Azure)
@@ -105,22 +98,14 @@ services:
                       - description: /23 vNet with 251 addresses (+5 addresses reserved by Azure)
                         enum:
                           - "23"
+
                   location:
                     title: vNet Location
                     type: string
-                    widget:
-                      id: select
+                    widget: select
                     default: "WestEurope"
-                    oneOf:
-                      - description: WestEurope (default choice)
-                        enum:
-                          - "WestEurope"
-                      - description: GermanyWestCentral
-                        enum:
-                          - "GermanyWestCentral"
-                      - description: NorthEurope
-                        enum:
-                          - "NorthEurope"
-                      - description: EastUS
-                        enum:
-                          - "EastUS"
+                    enum:
+                      - "WestEurope"
+                      - "GermanyWestCentral"
+                      - "NorthEurope"
+                      - "EastUS"
