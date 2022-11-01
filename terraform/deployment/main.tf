@@ -40,7 +40,7 @@ resource "kubernetes_secret" "unipipe_networking" {
   }
 
   data = {
-    "GIT_REMOTE"              = "git@github.com:likvid-bank/networking-services.git"
+    "GIT_REMOTE"              = github_repository.instance_repository.ssh_clone_url
     "GIT_REMOTE_BRANCH"       = "main"
     "GIT_SSH_KEY"             = tls_private_key.git_ssh_key.private_key_pem
     "APP_BASIC_AUTH_USERNAME" = "marketplace"
