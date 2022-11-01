@@ -15,3 +15,10 @@ resource "azurerm_storage_container" "unipipe-networking" {
   name                  = "tfstates"
   storage_account_name  = azurerm_storage_account.unipipe-networking.name
 }
+
+resource "azurerm_role_assignment" "unipipe-networking-backend" {
+  scope                = azurerm_storage_account.unipipe-networking.id
+  role_definition_name = "Contributor"
+  principal_id       = azuread_service_principal.unipipe-networking.id
+
+}
