@@ -17,3 +17,13 @@ resource "github_repository_deploy_key" "unipipe_networking" {
   key        = tls_private_key.git_ssh_key.public_key_openssh
   read_only  = "false"
 }
+
+
+# Azure
+resource "github_repository_deploy_key" "unipipe-ssh-key" {
+  title      = "unipipe-service-broker-deploy-key"
+  repository = github_repository.instance_repository.name
+  key        = module.unipipe.unipipe_git_ssh_key
+  read_only  = "false"
+
+}

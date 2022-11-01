@@ -1,23 +1,3 @@
-terraform {
-  required_providers {
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "2.30.0"
-
-    }
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.29.1"
-    }
-    github = {
-      source = "integrations/github"
-      version = "5.7.0"
-    }
-  }
-}
-
-
-
 locals {
   tenant_id       = "703c8d27-13e0-4836-8b2e-8390c588cf80" # devmeshcloud.onmicrosoft.com
   subscription_id = "497d294f-0f5d-4641-b448-93b32fcd9e93" # likvid-central-services
