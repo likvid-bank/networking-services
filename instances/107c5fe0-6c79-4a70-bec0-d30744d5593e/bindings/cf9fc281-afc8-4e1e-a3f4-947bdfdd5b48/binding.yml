@@ -1,0 +1,21 @@
+---
+bindingId: "cf9fc281-afc8-4e1e-a3f4-947bdfdd5b48"
+serviceInstanceId: "107c5fe0-6c79-4a70-bec0-d30744d5593e"
+serviceDefinitionId: "45eef657-0fd1-403f-975e-f133feb60489"
+planId: "597e56bb-60f9-4bdb-beab-91fc15b43004"
+originatingIdentity: !<PlatformContext>
+  platform: "meshmarketplace"
+  user_id: "75606cd5-2251-4134-9e46-1604f001312b"
+  user_euid: "fzieger@meshcloud.io"
+parameters: {}
+bindResource:
+  tenant_id: "c4a1f7bc-9a89-4a8d-a03f-3df5c639bd5d"
+  platform: "azure.meshcloud-azure-dev"
+context: !<PlatformContext>
+  platform: "meshmarketplace"
+  permission_url: null
+  project_id: "dev"
+  auth_url: null
+  customer_id: "likvid-website"
+  token_url: null
+deleted: false
