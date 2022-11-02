@@ -52,68 +52,6 @@ resource "azurerm_subnet" "workload-subnet" {
   address_prefixes     = [var.address_space_workload]
 }
 
-resource "azurerm_network_interface" "spoke-nic" {
-  provider             = azurerm.spoke-provider
-  name                 = "${local.prefix-spoke}-nic"
-  location             = azurerm_resource_group.spoke-vnet-rg.location
-  resource_group_name  = azurerm_resource_group.spoke-vnet-rg.name
-  enable_ip_forwarding = true
-
-  ip_configuration {
-    name                          = local.prefix-spoke
-    subnet_id                     = azurerm_subnet.workload-subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, as tags are managed by meshStack and policies
-      tags
-    ]
-  }
-}
-
-resource "azurerm_virtual_machine" "spoke-vm" {
-  name                  = "${local.prefix-spoke}-vm"
-  location              = azurerm_resource_group.spoke-vnet-rg.location
-  resource_group_name   = azurerm_resource_group.spoke-vnet-rg.name
-  network_interface_ids = [azurerm_network_interface.spoke-nic.id]
-  vm_size               = var.vmsize
-
-  storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
-    version   = "latest"
-  }
-
-  storage_os_disk {
-    name              = "myosdisk1"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-
-  os_profile {
-    computer_name  = "${local.prefix-hub}-vm"
-    admin_username = var.username
-    admin_password = var.password
-  }
-
-  os_profile_linux_config {
-    disable_password_authentication = false
-    ssh_keys {
-      path     = "/home/${var.username}/.ssh/authorized_keys"
-      key_data = file("~/.ssh/id_rsa.pub")
-    }
-  }
-
-  tags = {
-    environment = local.prefix-spoke
-  }
-}
-
-
 resource "azurerm_route_table" "spoke-rt" {
   provider                      = azurerm.spoke-provider
   name                          = "spoke-rt"
