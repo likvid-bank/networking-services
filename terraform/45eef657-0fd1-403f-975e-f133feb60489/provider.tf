@@ -1,11 +1,13 @@
 provider "azurerm" {
-  alias           = "spoke-provider"
-  subscription_id = var.tenant_id
+  alias                      = "spoke-provider"
+  subscription_id            = var.tenant_id
+  skip_provider_registration = true
   # client_id and client_secret must be set via env variables
   features {
     resource_group {
       prevent_deletion_if_contains_resources = true
     }
+
   }
 }
 
