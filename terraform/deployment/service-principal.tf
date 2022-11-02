@@ -33,6 +33,12 @@ resource "azurerm_role_assignment" "networking_contributor" {
   principal_id         = azuread_service_principal.unipipe-networking.object_id
 }
 
+resource "azurerm_role_assignment" "automation_contributor" {
+  scope                = local.scope
+  role_definition_name = "Automation Contributor"
+  principal_id         = azuread_service_principal.unipipe-networking.object_id
+}
+
 resource "azurerm_role_definition" "resource_group_contributor" {
   name        = "resource_group_contributor"
   scope       = local.scope
