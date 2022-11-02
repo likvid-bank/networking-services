@@ -1,0 +1,24 @@
+{
+  "variable": {
+    "platform_secret": {
+      "description": "The secret that will be used by Terraform to authenticate against the cloud platform.",
+      "type": "string",
+      "sensitive": true
+    }
+  },
+  "module": {
+    "wrapper": {
+      "source": "../../../../terraform/45eef657-0fd1-403f-975e-f133feb60489",
+      "platform_secret": "${var.platform_secret}",
+      "plan_id": "597e56bb-60f9-4bdb-beab-91fc15b43004",
+      "plan_name": "Cloud-only",
+      "platform": "azure.meshcloud-azure-dev",
+      "project_id": "dev",
+      "customer_id": "likvid-website",
+      "vnet_size": "25",
+      "location": "WestEurope",
+      "tenant_id": "c4a1f7bc-9a89-4a8d-a03f-3df5c639bd5d",
+      "address_space_workload": "10.1.0.0/25"
+    }
+  }
+}
