@@ -27,3 +27,17 @@ terraform {
     }
   }
 }
+
+provider "azuread" {
+  tenant_id = local.tenant_id
+}
+
+provider "azurerm" {
+  tenant_id       = local.tenant_id
+  subscription_id = local.subscription_id
+  features {}
+}
+
+provider "github" {
+  owner = "likvid-bank"
+}

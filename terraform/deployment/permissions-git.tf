@@ -1,7 +1,3 @@
-provider "github" {
-  owner = "likvid-bank"
-}
-
 resource "github_repository" "instance_repository" {
   name = "networking-services"
 
