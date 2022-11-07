@@ -1,14 +1,20 @@
-locals {
-  tenant_id       = "703c8d27-13e0-4836-8b2e-8390c588cf80" # devmeshcloud.onmicrosoft.com
-  subscription_id = "497d294f-0f5d-4641-b448-93b32fcd9e93" # likvid-central-services
-}
-
-locals {
-  scope = "/providers/Microsoft.Management/managementGroups/${local.tenant_id}"
-}
-
 #
-# Service Principal
+# storage for terraform state of service instances
+#
+resource "azurerm_storage_account" "unipipe_networking" {
+  name                     = "unipipenetworkinglikvid"
+  resource_group_name      = azurerm_resource_group.unipipe_networking.name
+  location                 = azurerm_resource_group.unipipe_networking.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_storage_container" "unipipe_networking" {
+  name                 = "tfstates"
+  storage_account_name = azurerm_storage_account.unipipe_networking.name
+}
+#
+# Service Principal for managing service instances
 #
 resource "azuread_application" "unipipe_networking" {
   display_name = "unipipe-networking"
@@ -23,7 +29,7 @@ resource "azuread_service_principal_password" "unipipe_networking" {
 }
 
 #
-# Permissions for the Service Principal
+# Permissions for the Service Principal to manage service instances
 #
 resource "azurerm_role_definition" "resource_group_contributor" {
   name        = "resource_group_contributor"
@@ -55,9 +61,8 @@ resource "azurerm_role_assignment" "networking_contributor" {
   principal_id         = azuread_service_principal.unipipe_networking.object_id
 }
 
-resource "azurerm_role_assignment" "unipipe_networking-backend" {
+resource "azurerm_role_assignment" "unipipe_networking_backend" {
   scope                = azurerm_storage_account.unipipe_networking.id
   role_definition_name = "Contributor"
   principal_id         = azuread_service_principal.unipipe_networking.id
-
 }

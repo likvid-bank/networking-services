@@ -5,6 +5,21 @@ terraform {
   }
 }
 
+locals {
+  # The GitHub organization the instance repostiory lives in.
+  github_owner = "likvid-bank"
+
+  # Id of the Azure AD tenant that you want to offer your service in.
+  tenant_id = "703c8d27-13e0-4836-8b2e-8390c588cf80" # devmeshcloud.onmicrosoft.com
+
+  # Id of the Azure Subscription that should host the service broker container and state.
+  subscription_id = "497d294f-0f5d-4641-b448-93b32fcd9e93" # likvid-central-services
+
+  # The scope on which the Service Principal will be granted permissions.
+  # Must be of the form `/providers/Microsoft.Management/managementGroups/<tenant_id>`
+  scope = "/providers/Microsoft.Management/managementGroups/${local.tenant_id}"
+}
+
 resource "azurerm_resource_group" "unipipe_networking" {
   name     = "unipipe-networking"
   location = "West Europe"
@@ -31,20 +46,4 @@ module "unipipe" {
   depends_on = [
     azurerm_resource_group.unipipe_networking
   ]
-}
-
-#
-# storage for terraform state of service instances
-#
-resource "azurerm_storage_account" "unipipe_networking" {
-  name                     = "unipipenetworkinglikvid"
-  resource_group_name      = azurerm_resource_group.unipipe_networking.name
-  location                 = azurerm_resource_group.unipipe_networking.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
-resource "azurerm_storage_container" "unipipe_networking" {
-  name                 = "tfstates"
-  storage_account_name = azurerm_storage_account.unipipe_networking.name
 }

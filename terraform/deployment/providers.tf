@@ -38,5 +38,5 @@ provider "azurerm" {
 }
 
 provider "github" {
-  owner = "likvid-bank"
+  owner = local.github_owner
 }
