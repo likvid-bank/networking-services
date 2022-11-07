@@ -34,6 +34,8 @@ module "unipipe" {
   unipipe_git_branch          = "main"
   unipipe_basic_auth_username = "marketplace"
 
+  unipipe_version = "v1.7.1"
+
   deploy_terraform_runner = true
   terraform_runner_environment_variables = {
     "TF_VAR_platform_secret" = azuread_service_principal_password.unipipe_networking.value
