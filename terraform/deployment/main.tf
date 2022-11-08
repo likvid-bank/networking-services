@@ -16,7 +16,6 @@ locals {
   subscription_id = "497d294f-0f5d-4641-b448-93b32fcd9e93" # likvid-central-services
 
   # The scope on which the Service Principal will be granted permissions.
-  # Must be of the form `/providers/Microsoft.Management/managementGroups/<tenant_id>`
   scope = "/providers/Microsoft.Management/managementGroups/${local.tenant_id}"
 }
 
