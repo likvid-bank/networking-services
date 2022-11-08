@@ -13,6 +13,7 @@ resource "azurerm_storage_container" "unipipe_networking" {
   name                 = "tfstates"
   storage_account_name = azurerm_storage_account.unipipe_networking.name
 }
+
 #
 # Service Principal for managing service instances
 #
