@@ -1,6 +1,6 @@
 # networking-services
 
-This repository is used as a backend for offering networking services to customers of the likvid bank cloud foundation. The services are brokered by [unipipe service broker](https://github.com/meshcloud/unipipe-service-broker/).
+This repository is used as a backend for offering networking services to customers of the likvid bank cloud foundation. The services are managed by [unipipe service broker](https://github.com/meshcloud/unipipe-service-broker/).
 
 ## How-to
 
