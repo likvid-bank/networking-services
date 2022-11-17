@@ -1,12 +1,12 @@
 # networking-services
 
-This repository is used as a backend for offering networking services to customers of the likvid bank cloud foundation.
+This repository is used as a backend for offering networking services to customers of the likvid bank cloud foundation. The services are brokered by [unipipe service broker](https://github.com/meshcloud/unipipe-service-broker/).
 
 
 ## Repository structure
 
 We use terraform for bootstrapping of the hub and service broker.
-UniPipe terraform runner calls the module under `terraform/45eef657-0fd1-403f-975e-f133feb60489` whenever a new spoke is ordered.
+[UniPipe terraform runner](https://github.com/meshcloud/unipipe-service-broker/tree/master/terraform-runner) calls the module under `terraform/45eef657-0fd1-403f-975e-f133feb60489` whenever a new spoke is ordered.
 
 ```
 .
