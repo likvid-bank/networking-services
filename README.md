@@ -2,8 +2,44 @@
 
 This repository is used as a backend for offering networking services to customers of the likvid bank cloud foundation. The services are brokered by [unipipe service broker](https://github.com/meshcloud/unipipe-service-broker/).
 
+## How-to
 
-## Repository structure
+### Manually enter CIDR range for newly created network service request.
+
+When customer requests a new serivce instance unipipe service broker commits an instance.yml file in the git repository under `instances/<uuid>/instance.yml`. The instance.yml file contains the parameters provided by the customer. Check the value of `vnet_size`.
+
+Example:
+```yml
+#instances/5a2a7ebf-b070-42c8-ae34-35e22e10f47e/instance.yml
+---
+serviceInstanceId: "5a2a7ebf-b070-42c8-ae34-35e22e10f47e"
+
+...
+
+parameters:
+  vnet_size: "25"
+  location: "WestEurope"
+```
+
+Create a file params.yml with a CIDR range that satisfies the customers ordered vnet_size.
+
+Example:
+```yml
+# instances/5a2a7ebf-b070-42c8-ae34-35e22e10f47e/params.yml
+address_space_workload: 10.50.1.0/25
+```
+
+### Work with the repository locally
+
+Apply the terraform module inside `terraform/deployment/`.
+This will create a file `terraform/deployment/env.sh` that contains the credentials of the service principal used in the automation container.
+Run `source terraform/deployment/env.sh` to add the credentials to your env.
+Run `unipipe terraform` or change into any instance directory and run `terraform apply`.
+
+
+## Reference
+
+### Repository structure
 
 We use terraform for bootstrapping of the hub and service broker.
 [UniPipe terraform runner](https://github.com/meshcloud/unipipe-service-broker/tree/master/terraform-runner) calls the module under `terraform/45eef657-0fd1-403f-975e-f133feb60489` whenever a new spoke is ordered.
@@ -40,9 +76,3 @@ We use terraform for bootstrapping of the hub and service broker.
         └── variables.tf
 ```
 
-## Working with the repository locally
-
-Apply the terraform module inside `terraform/deployment/`.
-This will create a file `terraform/deployment/env.sh` that contains the credentials of the service principal used in the automation container.
-Run `source terraform/deployment/env.sh` to add the credentials to your env.
-Run `unipipe terraform` or change into any instance directory and run `terraform apply`.
