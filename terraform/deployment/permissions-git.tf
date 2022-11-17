@@ -1,7 +1,7 @@
 resource "github_repository" "instance_repository" {
   name = "networking-services"
 
-  visibility  = "private"
+  visibility  = "public"
   description = "Instance repository for Networking Services in Likvid-Bank."
 }
 
