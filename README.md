@@ -5,7 +5,7 @@ This repository is used as a backend for offering networking services to custome
 
 ## Repository structure
 
-We use terraform for bootstrapping of the hub, service broker.
+We use terraform for bootstrapping of the hub and service broker.
 UniPipe terraform runner calls the module under `terraform/45eef657-0fd1-403f-975e-f133feb60489` whenever a new spoke is ordered.
 
 ```
@@ -26,8 +26,7 @@ UniPipe terraform runner calls the module under `terraform/45eef657-0fd1-403f-97
     │   ├── main.tf
     │   ├── provider.tf
     │   └── variables.tf
-    ├── deployment # module for deploying the service broker containers
-    │   ├── env.sh
+    ├── deployment # module for deploying the service broker on Azure
     │   ├── main.tf
     │   ├── output.tf
     │   ├── permissions-azure.tf
@@ -39,5 +38,11 @@ UniPipe terraform runner calls the module under `terraform/45eef657-0fd1-403f-97
         ├── hub-vnet.tf
         ├── main.tf
         └── variables.tf
-
 ```
+
+## Working with the repository locally
+
+Apply the terraform module inside `terraform/deployment/`.
+This will create a file `terraform/deployment/env.sh` that contains the credentials of the service principal used in the automation container.
+Run `source terraform/deployment/env.sh` to add the credentials to your env.
+Run `unipipe terraform` or change into any instance directory and run `terraform apply`.
