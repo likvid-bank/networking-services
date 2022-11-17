@@ -1,3 +1,2 @@
----
-status: "in progress"
-description: "preparing binding deletion"
+status: failed
+description: Processing the binding failed!
