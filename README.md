@@ -4,9 +4,9 @@ This repository is used as a backend for offering networking services to custome
 
 ## How-to
 
-### Manually enter CIDR range for newly created network service request.
+### Manually enter CIDR range for a newly created network service request
 
-When customer requests a new serivce instance unipipe service broker commits an instance.yml file in the git repository under `instances/<uuid>/instance.yml`. The instance.yml file contains the parameters provided by the customer. Check the value of `vnet_size`.
+When a customer requests a new serivce instance, unipipe service broker commits an instance.yml file in the git repository under `instances/<uuid>/instance.yml`. The file contains the parameters provided by the customer. Check the value of `vnet_size`.
 
 Example `instances/5a2a7ebf-b070-42c8-ae34-35e22e10f47e/instance.yml`:
 ```yml
@@ -20,7 +20,7 @@ parameters:
   location: "WestEurope"
 ```
 
-Create a file params.yml with a CIDR range that satisfies the customers ordered vnet_size.
+Create a file params.yml with a CIDR range that satisfies the customers ordered `vnet_size`.
 
 Example `instances/5a2a7ebf-b070-42c8-ae34-35e22e10f47e/params.yml`:
 ```yml
