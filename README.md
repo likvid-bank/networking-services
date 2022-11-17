@@ -27,6 +27,8 @@ Example `instances/5a2a7ebf-b070-42c8-ae34-35e22e10f47e/params.yml`:
 address_space_workload: 10.50.1.0/25
 ```
 
+unipipe will now create and apply the spoke and peerings for the customer.
+
 ### Work with the repository locally
 
 Apply the terraform module inside `terraform/deployment/`.
