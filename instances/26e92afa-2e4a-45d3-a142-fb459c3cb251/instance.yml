@@ -1,0 +1,142 @@
+---
+serviceInstanceId: "26e92afa-2e4a-45d3-a142-fb459c3cb251"
+serviceDefinitionId: "45eef657-0fd1-403f-975e-f133feb60489"
+planId: "597e56bb-60f9-4bdb-beab-91fc15b43004"
+serviceDefinition:
+  id: "45eef657-0fd1-403f-975e-f133feb60489"
+  name: "Azure-Networking"
+  description: "Use this service if you need networking on Azure. It creates an Azure\
+    \ virtual network in your subscription."
+  plans:
+  - id: "597e56bb-60f9-4bdb-beab-91fc15b43004"
+    name: "Cloud-only"
+    description: "Choose this plan if you need a vNet that is connected to other projects\
+      \ in the same environment (e.g. prod)."
+    metadata:
+      displayName: "Cloud-Only Connectivity"
+      manualInstanceInputNeeded: true
+      bullets:
+      - "A subnet with connection to other projects in the same environment is added\
+        \ by default."
+      - "You may add additional subnets directly in Azure if needed."
+    schemas:
+      service_instance:
+        create:
+          parameters:
+            $schema: "http://json-schema.org/draft-04/schema#"
+            properties:
+              vnet_size:
+                title: "size of vNet"
+                type: "string"
+                widget: "select"
+                default: "25"
+                oneOf:
+                - description: "/27 vNet with 11 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "27"
+                - description: "/26 vNet with 27 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "26"
+                - description: "/25 vNet with 61 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "25"
+                - description: "/24 vNet with 123 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "24"
+                - description: "/23 vNet with 251 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "23"
+              location:
+                title: "vNet Location"
+                type: "string"
+                widget: "select"
+                default: "WestEurope"
+                enum:
+                - "WestEurope"
+                - "GermanyWestCentral"
+                - "NorthEurope"
+                - "EastUS"
+    free: true
+  - id: "b4c64100-f648-4373-a657-9aa94196b59f"
+    name: "On-prem"
+    description: "Choose this plan if you need on-prem connectivity. It creates an\
+      \ Azure subnet with routing tables to on-prem."
+    metadata:
+      displayName: "On-prem Connectivity"
+      manualInstanceInputNeeded: true
+      bullets:
+      - "A subnet with connection to on-prem is added by default."
+      - "You may add additional subnets directly in Azure if needed."
+    schemas:
+      service_instance:
+        create:
+          parameters:
+            $schema: "http://json-schema.org/draft-04/schema#"
+            properties:
+              vnet_size:
+                title: "size of vNet"
+                type: "string"
+                widget: "select"
+                default: "25"
+                oneOf:
+                - description: "/27 vNet with 11 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "27"
+                - description: "/26 vNet with 27 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "26"
+                - description: "/25 vNet with 61 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "25"
+                - description: "/24 vNet with 123 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "24"
+                - description: "/23 vNet with 251 addresses (+5 addresses reserved\
+                    \ by Azure)"
+                  enum:
+                  - "23"
+              location:
+                title: "vNet Location"
+                type: "string"
+                widget: "select"
+                default: "WestEurope"
+                enum:
+                - "WestEurope"
+                - "GermanyWestCentral"
+                - "NorthEurope"
+                - "EastUS"
+    free: true
+  bindable: true
+  planUpdateable: false
+  tags: []
+  metadata:
+    displayName: "Azure Networking"
+    imageUrl: "data:image/png;base64,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"
+    tenantAware: true
+  requires: []
+  dashboardClient: null
+originatingIdentity: !<PlatformContext>
+  platform: "meshmarketplace"
+  user_id: "f233d4e6-b6f8-40e4-9808-b10c327778e1"
+  user_euid: "malhussan@meshcloud.io"
+asyncAccepted: true
+parameters:
+  vnet_size: "25"
+  location: "WestEurope"
+context: !<PlatformContext>
+  platform: "meshmarketplace"
+  permission_url: null
+  project_id: "test-si-creation"
+  auth_url: null
+  customer_id: "likvid-operations"
+  token_url: null
+deleted: false
